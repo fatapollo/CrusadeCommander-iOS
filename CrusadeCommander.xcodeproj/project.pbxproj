@@ -1,0 +1,430 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1901DCC370434152B9EC8404 /* EventInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01D2EEF8644F0285BAF048 /* EventInstance.swift */; };
+		1EF5F8108A81461AB3B7F4BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB56443BB6E541799F7680F8 /* ContentView.swift */; };
+		269CE4A72E89426CA91FA9CC /* BattleLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FB5C85CC84543ADCE289A /* BattleLogView.swift */; };
+		273E187AA53344FDBB8C9F35 /* PlayerResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45A66A06504671A7E62F46 /* PlayerResource.swift */; };
+		28EE8097660F4002AFC8709A /* CampaignMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA396EAE624453CB4F41DE9 /* CampaignMapView.swift */; };
+		4A13DE74C0434DA1B3E421DE /* CampaignDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659043F36ADB40C5945CA165 /* CampaignDashboardView.swift */; };
+		51AE49F14155457EAE82913E /* CampaignListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39526765D6C45CF94BC0FFB /* CampaignListView.swift */; };
+		67F4B7CF24F14AF1BD98B791 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ECB4706C104C4198DD46FB /* EventType.swift */; };
+		6FE1F05B1CB348078BA86948 /* CrusadeCommanderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A699D08E7B994BCCB66A3646 /* CrusadeCommanderApp.swift */; };
+		70618645FAC04B98B5F932E8 /* MapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC654EB39EA2471A94C3F232 /* MapNode.swift */; };
+		707A805AE49A481E94F0E496 /* PlayerReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF102512F4B74828AF22E819 /* PlayerReward.swift */; };
+		A4D09FD1D91949DD8DAF56D6 /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895267F1ABE24A52A4A27BAD /* PlayersView.swift */; };
+		A825C3FCDF1F41B5B225DDFA /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E33210FD764E6BB8BB1D55 /* ConfigView.swift */; };
+		AA444152F0C84F52BF5119E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71EAF05BAC36474A822A1078 /* Assets.xcassets */; };
+		BE563B49EC0443D5AB5020DC /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A516CC54844D4CAAAE979C /* Shared.swift */; };
+		CD469F51338D49339985ABDC /* RewardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2D46D98834782ACF46574 /* RewardType.swift */; };
+		CE59161309054E52990A98EA /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7201DB54F60B45B89293DCC4 /* ResourceType.swift */; };
+		D0A2DB7947C14AF787ECBD3A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9415C3AE86F947F3BE43E999 /* Campaign.swift */; };
+		DBF50756951246788A914783 /* Battle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C391A126784B3595CC10C6 /* Battle.swift */; };
+		ED7D01BFA2474AD3B0A4DBEE /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48326F6C644C3886AD7E1B /* Player.swift */; };
+		F50F2DB7F81D46CEBBAB47CF /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FEE88AC96A4D488658420B /* EventsView.swift */; };
+		2D64A926BBB040EA9F8ED21E /* GenerateBattleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728C78FBE14477B9BC3D320 /* GenerateBattleMapView.swift */; };
+		37EAEC01C3C046D39D9B83FA /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD00745865C48BD9D3A832F /* SetupWizardView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		18A2D46D98834782ACF46574 /* RewardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardType.swift; sourceTree = "<group>"; };
+		1AA396EAE624453CB4F41DE9 /* CampaignMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignMapView.swift; sourceTree = "<group>"; };
+		2A48326F6C644C3886AD7E1B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		3D01D2EEF8644F0285BAF048 /* EventInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInstance.swift; sourceTree = "<group>"; };
+		5C45A66A06504671A7E62F46 /* PlayerResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerResource.swift; sourceTree = "<group>"; };
+		659043F36ADB40C5945CA165 /* CampaignDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignDashboardView.swift; sourceTree = "<group>"; };
+		71EAF05BAC36474A822A1078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7201DB54F60B45B89293DCC4 /* ResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
+		895267F1ABE24A52A4A27BAD /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
+		9415C3AE86F947F3BE43E999 /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
+		A39526765D6C45CF94BC0FFB /* CampaignListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignListView.swift; sourceTree = "<group>"; };
+		A699D08E7B994BCCB66A3646 /* CrusadeCommanderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrusadeCommanderApp.swift; sourceTree = "<group>"; };
+		B6A516CC54844D4CAAAE979C /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		CC654EB39EA2471A94C3F232 /* MapNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNode.swift; sourceTree = "<group>"; };
+		D6ECB4706C104C4198DD46FB /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
+		D6FEE88AC96A4D488658420B /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		DB56443BB6E541799F7680F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E9E33210FD764E6BB8BB1D55 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
+		ECF14F315460479BA1422B70 /* CrusadeCommander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrusadeCommander.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F53FB5C85CC84543ADCE289A /* BattleLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleLogView.swift; sourceTree = "<group>"; };
+		F7C391A126784B3595CC10C6 /* Battle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battle.swift; sourceTree = "<group>"; };
+		FF102512F4B74828AF22E819 /* PlayerReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerReward.swift; sourceTree = "<group>"; };
+		F728C78FBE14477B9BC3D320 /* GenerateBattleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateBattleMapView.swift; sourceTree = "<group>"; };
+		0FD00745865C48BD9D3A832F /* SetupWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWizardView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		604FC86B99F44904B7FCE579 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		13146850E1E84E2E9C1D612A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9415C3AE86F947F3BE43E999 /* Campaign.swift */,
+				2A48326F6C644C3886AD7E1B /* Player.swift */,
+				7201DB54F60B45B89293DCC4 /* ResourceType.swift */,
+				5C45A66A06504671A7E62F46 /* PlayerResource.swift */,
+				D6ECB4706C104C4198DD46FB /* EventType.swift */,
+				3D01D2EEF8644F0285BAF048 /* EventInstance.swift */,
+				F7C391A126784B3595CC10C6 /* Battle.swift */,
+				CC654EB39EA2471A94C3F232 /* MapNode.swift */,
+				18A2D46D98834782ACF46574 /* RewardType.swift */,
+				FF102512F4B74828AF22E819 /* PlayerReward.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1479573955E340FCBDA59A54 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B6A516CC54844D4CAAAE979C /* Shared.swift */,
+				A39526765D6C45CF94BC0FFB /* CampaignListView.swift */,
+				659043F36ADB40C5945CA165 /* CampaignDashboardView.swift */,
+				895267F1ABE24A52A4A27BAD /* PlayersView.swift */,
+				F53FB5C85CC84543ADCE289A /* BattleLogView.swift */,
+				D6FEE88AC96A4D488658420B /* EventsView.swift */,
+				1AA396EAE624453CB4F41DE9 /* CampaignMapView.swift */,
+				E9E33210FD764E6BB8BB1D55 /* ConfigView.swift */,
+							F728C78FBE14477B9BC3D320 /* GenerateBattleMapView.swift */,
+				0FD00745865C48BD9D3A832F /* SetupWizardView.swift */,
+);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		26722CD764F24F6484CFE9B2 = {
+			isa = PBXGroup;
+			children = (
+				AAAA00000000000000000001 /* CrusadeCommander */,
+				F7528408FAED44368AC2F0CB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AAAA00000000000000000001 /* CrusadeCommander */ = {
+			isa = PBXGroup;
+			children = (
+				A699D08E7B994BCCB66A3646 /* CrusadeCommanderApp.swift */,
+				DB56443BB6E541799F7680F8 /* ContentView.swift */,
+				13146850E1E84E2E9C1D612A /* Models */,
+				1479573955E340FCBDA59A54 /* Views */,
+				71EAF05BAC36474A822A1078 /* Assets.xcassets */,
+			);
+			path = CrusadeCommander;
+			sourceTree = "<group>";
+		};
+		F7528408FAED44368AC2F0CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECF14F315460479BA1422B70 /* CrusadeCommander.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E4DB63F04034082B3EBB216 /* CrusadeCommander */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A0BEF1C7BEF4CA1B63D24EA /* Build configuration list for PBXNativeTarget "CrusadeCommander" */;
+			buildPhases = (
+				BC938B89CE844B069E5FEE3A /* Sources */,
+				604FC86B99F44904B7FCE579 /* Frameworks */,
+				81672E78101E47B88582FCF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CrusadeCommander;
+			productName = CrusadeCommander;
+			productReference = ECF14F315460479BA1422B70 /* CrusadeCommander.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		48F0EEA4383D4256BF4A8874 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					8E4DB63F04034082B3EBB216 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = FF059B75F2754EE6A3DAE1D7 /* Build configuration list for PBXProject "CrusadeCommander" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 26722CD764F24F6484CFE9B2;
+			productRefGroup = F7528408FAED44368AC2F0CB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E4DB63F04034082B3EBB216 /* CrusadeCommander */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		81672E78101E47B88582FCF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA444152F0C84F52BF5119E6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BC938B89CE844B069E5FEE3A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FE1F05B1CB348078BA86948 /* CrusadeCommanderApp.swift in Sources */,
+				1EF5F8108A81461AB3B7F4BB /* ContentView.swift in Sources */,
+				D0A2DB7947C14AF787ECBD3A /* Campaign.swift in Sources */,
+				ED7D01BFA2474AD3B0A4DBEE /* Player.swift in Sources */,
+				CE59161309054E52990A98EA /* ResourceType.swift in Sources */,
+				273E187AA53344FDBB8C9F35 /* PlayerResource.swift in Sources */,
+				67F4B7CF24F14AF1BD98B791 /* EventType.swift in Sources */,
+				1901DCC370434152B9EC8404 /* EventInstance.swift in Sources */,
+				DBF50756951246788A914783 /* Battle.swift in Sources */,
+				70618645FAC04B98B5F932E8 /* MapNode.swift in Sources */,
+				CD469F51338D49339985ABDC /* RewardType.swift in Sources */,
+				707A805AE49A481E94F0E496 /* PlayerReward.swift in Sources */,
+				BE563B49EC0443D5AB5020DC /* Shared.swift in Sources */,
+				51AE49F14155457EAE82913E /* CampaignListView.swift in Sources */,
+				4A13DE74C0434DA1B3E421DE /* CampaignDashboardView.swift in Sources */,
+				A4D09FD1D91949DD8DAF56D6 /* PlayersView.swift in Sources */,
+				269CE4A72E89426CA91FA9CC /* BattleLogView.swift in Sources */,
+				F50F2DB7F81D46CEBBAB47CF /* EventsView.swift in Sources */,
+				28EE8097660F4002AFC8709A /* CampaignMapView.swift in Sources */,
+				A825C3FCDF1F41B5B225DDFA /* ConfigView.swift in Sources */,
+							2D64A926BBB040EA9F8ED21E /* GenerateBattleMapView.swift in Sources */,
+				37EAEC01C3C046D39D9B83FA /* SetupWizardView.swift in Sources */,
+);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		28D5496DD9B547E9AF153161 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crusadecommander.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		617DE2DE00CC4769AD759CC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6241973A7E3643F3BFB73D30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		791B9CE8DAE8476EBF700638 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crusadecommander.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A0BEF1C7BEF4CA1B63D24EA /* Build configuration list for PBXNativeTarget "CrusadeCommander" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				791B9CE8DAE8476EBF700638 /* Debug */,
+				28D5496DD9B547E9AF153161 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF059B75F2754EE6A3DAE1D7 /* Build configuration list for PBXProject "CrusadeCommander" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6241973A7E3643F3BFB73D30 /* Debug */,
+				617DE2DE00CC4769AD759CC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 48F0EEA4383D4256BF4A8874 /* Project object */;
+}

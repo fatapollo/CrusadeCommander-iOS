@@ -1,0 +1,15 @@
+# ── macOS ───────────────────────────────────────────────────────────
+.DS_Store
+
+# ── Xcode / iOS ─────────────────────────────────────────────────────
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+.swiftpm/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM

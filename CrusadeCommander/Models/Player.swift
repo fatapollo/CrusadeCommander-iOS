@@ -222,6 +222,9 @@ extension APIClient {
             body: CreateUnitBody(name: name, datasheet: datasheet, points_cost: pointsCost, equipment: equipment, is_character: isCharacter, is_titanic: isTitanic, is_epic_hero: isEpicHero))
         return r.unit
     }
+    func deleteUnit(_ campaignId: String, unitId: String) async throws {
+        let _: EmptyResponse = try await delete("/api/campaigns/\(campaignId)/units/\(unitId)")
+    }
 
     // Battles
     func listBattles(_ campaignId: String) async throws -> [APIBattle] {

@@ -11,6 +11,8 @@ struct ForceDetailView: View {
     @State private var loading = true
     @State private var error: String?
     @State private var showAddUnit = false
+    @State private var unitPendingDelete: APIUnit?
+    @State private var deleting = false
 
     var body: some View {
         ScrollView {
@@ -53,6 +55,12 @@ struct ForceDetailView: View {
                     showAddUnit = false; Task { await load() }
                 })
             }
+        }
+        .alert("Delete Unit", isPresented: Binding(get: { unitPendingDelete != nil }, set: { if !$0 { unitPendingDelete = nil } }), presenting: unitPendingDelete) { u in
+            Button("Delete", role: .destructive) { Task { await deleteUnit(u) } }
+            Button("Cancel", role: .cancel) { unitPendingDelete = nil }
+        } message: { u in
+            Text("Permanently delete \"\(u.name)\" from the Order of Battle? This cannot be undone.")
         }
     }
 
@@ -116,6 +124,11 @@ struct ForceDetailView: View {
             }
         }
         .opacity(u.is_active ? 1 : 0.5)
+        .contextMenu {
+            Button(role: .destructive) { unitPendingDelete = u } label: {
+                Label("Delete Unit", systemImage: "trash")
+            }
+        }
     }
 
     private func miniStat(_ label: String, _ value: String, color: Color) -> some View {
@@ -134,6 +147,16 @@ struct ForceDetailView: View {
             let (u, f) = try await (units, forces)
             self.units = u
             self.force = f.first { $0.id == forceId }
+        } catch let e as APIError { error = e.message }
+        catch let e { self.error = e.localizedDescription }
+    }
+
+    private func deleteUnit(_ u: APIUnit) async {
+        deleting = true; error = nil
+        defer { deleting = false; unitPendingDelete = nil }
+        do {
+            try await APIClient.shared.deleteUnit(campaignId, unitId: u.id)
+            await load()
         } catch let e as APIError { error = e.message }
         catch let e { self.error = e.localizedDescription }
     }

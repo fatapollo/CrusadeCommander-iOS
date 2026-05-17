@@ -95,6 +95,9 @@ struct BattlesPanel: View {
                         style: b.status == .confirmed ? (b.outcome == .draw ? .dim : .success) : b.status == .pending ? .warning : .danger
                     )
                 }
+                if let asc = b.attacker_score, let dsc = b.defender_score, asc + dsc > 0 {
+                    Text("\(asc) – \(dsc)").font(.caption.weight(.semibold)).foregroundStyle(Color.inkDim)
+                }
                 if !b.mission_name.isEmpty {
                     Text(b.mission_name).font(.caption2).foregroundStyle(Color.inkFade)
                 }
@@ -134,6 +137,11 @@ struct RecordBattleSheet: View {
     @State private var defenderId: String = ""
     @State private var outcome: BattleOutcome = .attackerWins
     @State private var mission: String = ""
+    @State private var deployment: String = ""
+    @State private var durationTurns: Int = 5
+    @State private var opposingCommander: String = ""
+    @State private var attackerScore: Int = 0
+    @State private var defenderScore: Int = 0
     @State private var notes: String = ""
     @State private var busy = false
     @State private var error: String?
@@ -173,7 +181,31 @@ struct RecordBattleSheet: View {
                             TextField("", text: $mission)
                                 .padding(10).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 8))
                         }
-                        labeled("Outcome") {
+                        labeled("Deployment (optional)") {
+                            TextField("", text: $deployment)
+                                .padding(10).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                        labeled("Duration (turns)") {
+                            Stepper("\(durationTurns)", value: $durationTurns, in: 0...50)
+                                .padding(8).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                        HStack(spacing: 10) {
+                            labeled("Attacker Score") {
+                                TextField("0", value: $attackerScore, format: .number)
+                                    .keyboardType(.numberPad)
+                                    .padding(10).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                            labeled("Defender Score") {
+                                TextField("0", value: $defenderScore, format: .number)
+                                    .keyboardType(.numberPad)
+                                    .padding(10).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                        }
+                        labeled("Opposing Commander (optional)") {
+                            TextField("", text: $opposingCommander)
+                                .padding(10).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                        labeled("Outcome (auto from score — override if needed)") {
                             Picker("", selection: $outcome) {
                                 ForEach(BattleOutcome.allCases) { Text($0.rawValue).tag($0) }
                             }.pickerStyle(.segmented)
@@ -212,6 +244,14 @@ struct RecordBattleSheet: View {
         .navigationTitle("Record Battle")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
+        .onChange(of: attackerScore) { syncOutcome() }
+        .onChange(of: defenderScore) { syncOutcome() }
+    }
+
+    private func syncOutcome() {
+        if attackerScore > defenderScore { outcome = .attackerWins }
+        else if defenderScore > attackerScore { outcome = .defenderWins }
+        else { outcome = .draw }
     }
 
     private func labeled<V: View>(_ label: String, @ViewBuilder _ content: () -> V) -> some View {
@@ -227,8 +267,10 @@ struct RecordBattleSheet: View {
         do {
             let r = try await APIClient.shared.createBattle(
                 campaignId, battleSize: battleSize, mission: mission,
+                deployment: deployment, durationTurns: durationTurns, opposingCommander: opposingCommander,
                 attackerId: attackerId, defenderId: defenderId,
-                outcome: outcome, notes: notes
+                outcome: outcome, attackerScore: attackerScore, defenderScore: defenderScore,
+                notes: notes
             )
             if r.needs_confirmation == true {
                 feedback = "Waiting for the opposing player to confirm. XP and RP apply on confirmation."

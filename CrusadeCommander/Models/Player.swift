@@ -305,18 +305,25 @@ extension APIClient {
     }
     struct CreateBattleBody: Encodable {
         let battle_size: String; let mission_name: String
+        let deployment: String; let duration_turns: Int; let opposing_commander: String
         let attacker_force_id: String; let defender_force_id: String
-        let outcome: String; let notes: String
+        let outcome: String; let attacker_score: Int; let defender_score: Int
+        let notes: String
     }
     struct BattleCreatedResponse: Decodable {
         let battle: APIBattle
         let needs_confirmation: Bool?
     }
-    func createBattle(_ campaignId: String, battleSize: BattleSize, mission: String, attackerId: String, defenderId: String, outcome: BattleOutcome, notes: String) async throws -> BattleCreatedResponse {
+    func createBattle(_ campaignId: String, battleSize: BattleSize, mission: String,
+                      deployment: String, durationTurns: Int, opposingCommander: String,
+                      attackerId: String, defenderId: String, outcome: BattleOutcome,
+                      attackerScore: Int, defenderScore: Int, notes: String) async throws -> BattleCreatedResponse {
         try await post("/api/campaigns/\(campaignId)/battles", body: CreateBattleBody(
             battle_size: battleSize.rawValue, mission_name: mission,
+            deployment: deployment, duration_turns: durationTurns, opposing_commander: opposingCommander,
             attacker_force_id: attackerId, defender_force_id: defenderId,
-            outcome: outcome.rawValue, notes: notes))
+            outcome: outcome.rawValue, attacker_score: attackerScore, defender_score: defenderScore,
+            notes: notes))
     }
     func confirmBattle(_ campaignId: String, _ battleId: String) async throws {
         let _: BattleCreatedResponse = try await post("/api/campaigns/\(campaignId)/battles/\(battleId)/confirm")

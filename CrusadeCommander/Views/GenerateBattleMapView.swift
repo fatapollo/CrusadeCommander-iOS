@@ -99,8 +99,11 @@ struct ForceDetailView: View {
                     Text(f.name).font(.title3.weight(.bold))
                     if !f.team.isEmpty { BadgeView(text: f.team, style: .accent) }
                 }
-                Text("\(f.faction.isEmpty ? "—" : f.faction)\(f.player_name.isEmpty ? "" : " · \(f.player_name)")")
+                Text("\(f.faction.isEmpty ? "—" : f.faction) · CMDR \((f.commander?.isEmpty == false ? f.commander : nil) ?? (f.player_name.isEmpty ? "—" : f.player_name))")
                     .font(.caption).foregroundStyle(Color.inkDim)
+                if let m = f.motto, !m.isEmpty {
+                    Text("\u{201C}\(m)\u{201D}").font(.caption2.italic()).foregroundStyle(Color.inkFade)
+                }
             }
         }
     }
@@ -110,8 +113,9 @@ struct ForceDetailView: View {
         return HStack(spacing: 8) {
             stat("Supply", "\(used)/\(f.supply_limit)", sub: "\(f.supply_limit - used) free")
             stat("RP", "\(f.requisition_points)/10", accent: .accent)
-            stat("Battles", "\(f.battle_tally)")
-            stat("Wins", "\(f.victories)", accent: .successC)
+            stat("W", "\(f.wins ?? f.victories)", accent: .successC)
+            stat("L", "\(f.losses ?? 0)", accent: .dangerC)
+            stat("D", "\(f.draws ?? 0)", accent: .warningC)
         }
     }
 
@@ -136,9 +140,14 @@ struct ForceDetailView: View {
                         Text(u.name).font(.subheadline.weight(.semibold))
                         if u.is_character { BadgeView(text: "Character", style: .accent) }
                         if u.is_titanic { BadgeView(text: "Titanic", style: .warning) }
+                        if (u.status ?? "Active") == "Reserve" { BadgeView(text: "Reserve", style: .dim) }
+                        if (u.status ?? "Active") == "Injured" { BadgeView(text: "Injured", style: .warning) }
                         if !u.is_active { BadgeView(text: "Destroyed", style: .danger) }
+                        if u.is_active, (u.honour_available ?? 0) > 0 {
+                            BadgeView(text: "honour", style: .success)
+                        }
                     }
-                    Text("\(u.datasheet) · \(u.points_cost) pts · \(u.rank.rawValue)")
+                    Text("\(u.datasheet) · \(u.points_cost) pts · \(u.rank.rawValue)\((u.unit_type?.isEmpty == false) ? " · \(u.unit_type!)" : "")")
                         .font(.caption2).foregroundStyle(Color.inkFade)
                 }
                 Spacer()

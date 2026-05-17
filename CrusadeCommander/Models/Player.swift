@@ -225,6 +225,49 @@ extension APIClient {
     func deleteUnit(_ campaignId: String, unitId: String) async throws {
         let _: EmptyResponse = try await delete("/api/campaigns/\(campaignId)/units/\(unitId)")
     }
+    func getUnitDetail(_ campaignId: String, unitId: String) async throws -> UnitDetailResponse {
+        try await get("/api/campaigns/\(campaignId)/units/\(unitId)")
+    }
+
+    // Requisitions
+    func requisitionLog(_ campaignId: String, forceId: String) async throws -> [RequisitionLogItem] {
+        let r: RequisitionLogResponse = try await get("/api/campaigns/\(campaignId)/requisitions/\(forceId)/log")
+        return r.log
+    }
+    func reqIncreaseSupplyLimit(_ campaignId: String, forceId: String) async throws -> APIForce {
+        let r: RequisitionResult = try await post("/api/campaigns/\(campaignId)/requisitions/\(forceId)/increase-supply-limit")
+        return r.force
+    }
+    struct RenownedHeroesBody: Encodable { let unit_id: String; let enhancement_name: String; let description: String }
+    func reqRenownedHeroes(_ campaignId: String, forceId: String, unitId: String, name: String, description: String) async throws -> APIForce {
+        let r: RequisitionResult = try await post("/api/campaigns/\(campaignId)/requisitions/\(forceId)/renowned-heroes",
+            body: RenownedHeroesBody(unit_id: unitId, enhancement_name: name, description: description))
+        return r.force
+    }
+    struct UnitIdBody: Encodable { let unit_id: String }
+    func reqLegendaryVeterans(_ campaignId: String, forceId: String, unitId: String) async throws -> APIForce {
+        let r: RequisitionResult = try await post("/api/campaigns/\(campaignId)/requisitions/\(forceId)/legendary-veterans",
+            body: UnitIdBody(unit_id: unitId))
+        return r.force
+    }
+    struct RearmBody: Encodable { let unit_id: String; let new_equipment: String; let new_points_cost: Int? }
+    func reqRearmAndResupply(_ campaignId: String, forceId: String, unitId: String, equipment: String, pointsCost: Int?) async throws -> APIForce {
+        let r: RequisitionResult = try await post("/api/campaigns/\(campaignId)/requisitions/\(forceId)/rearm-and-resupply",
+            body: RearmBody(unit_id: unitId, new_equipment: equipment, new_points_cost: pointsCost))
+        return r.force
+    }
+    struct ScarBody: Encodable { let unit_id: String; let scar_id: String }
+    func reqRepairAndRecuperate(_ campaignId: String, forceId: String, unitId: String, scarId: String) async throws -> APIForce {
+        let r: RequisitionResult = try await post("/api/campaigns/\(campaignId)/requisitions/\(forceId)/repair-and-recuperate",
+            body: ScarBody(unit_id: unitId, scar_id: scarId))
+        return r.force
+    }
+    struct FreshRecruitsBody: Encodable { let unit_id: String; let added_points: Int }
+    func reqFreshRecruits(_ campaignId: String, forceId: String, unitId: String, addedPoints: Int) async throws -> APIForce {
+        let r: RequisitionResult = try await post("/api/campaigns/\(campaignId)/requisitions/\(forceId)/fresh-recruits",
+            body: FreshRecruitsBody(unit_id: unitId, added_points: addedPoints))
+        return r.force
+    }
 
     // Battles
     func listBattles(_ campaignId: String) async throws -> [APIBattle] {

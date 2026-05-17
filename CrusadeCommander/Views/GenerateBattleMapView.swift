@@ -11,6 +11,7 @@ struct ForceDetailView: View {
     @State private var loading = true
     @State private var error: String?
     @State private var showAddUnit = false
+    @State private var showReq = false
     @State private var unitPendingDelete: APIUnit?
     @State private var deleting = false
 
@@ -22,6 +23,19 @@ struct ForceDetailView: View {
                 } else if let f = force {
                     header(f)
                     statsGrid(f)
+                    Button { showReq = true } label: {
+                        HStack {
+                            Label("Requisitions", systemImage: "arrow.triangle.2.circlepath")
+                                .font(.subheadline.weight(.semibold))
+                            Spacer()
+                            Text("\(f.requisition_points) RP").font(.caption.weight(.bold)).foregroundStyle(Color.accent)
+                            Image(systemName: "chevron.right").font(.caption2).foregroundStyle(Color.inkFade)
+                        }
+                        .padding(12)
+                        .background(Color.bgElevated)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    .buttonStyle(.plain)
                     HStack {
                         Text("Order of Battle").font(.subheadline.weight(.semibold))
                         Spacer()
@@ -54,6 +68,13 @@ struct ForceDetailView: View {
                 AddUnitSheet(campaignId: campaignId, forceId: forceId, onDone: {
                     showAddUnit = false; Task { await load() }
                 })
+            }
+        }
+        .sheet(isPresented: $showReq) {
+            NavigationStack {
+                RequisitionsSheet(campaignId: campaignId, forceId: forceId,
+                                  force: force, units: units,
+                                  onChange: { Task { await load() } })
             }
         }
         .alert("Delete Unit", isPresented: Binding(get: { unitPendingDelete != nil }, set: { if !$0 { unitPendingDelete = nil } }), presenting: unitPendingDelete) { u in

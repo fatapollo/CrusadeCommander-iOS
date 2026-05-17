@@ -54,6 +54,11 @@ struct APICampaign: Codable, Identifiable, Hashable {
     let concluded_at: String?
     let created_at: String
     let updated_at: String
+    // Computed aggregates (present on newer backends; optional for tolerance).
+    let force_count: Int?
+    let unit_count: Int?
+    let battle_count: Int?
+    let power_rating: Int?
 }
 
 struct APIForce: Codable, Identifiable, Hashable {
@@ -73,6 +78,13 @@ struct APIForce: Codable, Identifiable, Hashable {
     var is_active: Bool
     var dropped_at: String?
     let created_at: String
+    var commander: String?
+    var motto: String?
+    let unit_count: Int?
+    let power_rating: Int?
+    let wins: Int?
+    let losses: Int?
+    let draws: Int?
 }
 
 enum Rank: String {
@@ -112,6 +124,9 @@ struct APIUnit: Codable, Identifiable, Hashable {
     var is_active: Bool
     var notes: String
     let created_at: String
+    var unit_type: String?
+    var status: String?
+    let honour_available: Int?
 
     var rank: Rank { Rank.from(xp: xp, isCharacter: is_character, canExceed30: can_exceed_30_xp) }
 }
@@ -143,7 +158,55 @@ struct APIBattle: Codable, Identifiable, Hashable {
     let confirmed_by_user_id: String?
     let confirmed_at: String?
     let dispute_reason: String
+    let attacker_score: Int?
+    let defender_score: Int?
+    let deployment: String?
+    let duration_turns: Int?
+    let opposing_commander: String?
 }
+
+struct APIHonour: Codable, Identifiable, Hashable {
+    let id: String
+    let unit_id: String
+    let category: String
+    let name: String
+    let description: String
+    let weapon_name: String
+    let relic_category: String?
+    let crusade_points_value: Int
+    let earned_at: String
+}
+
+struct APIScar: Codable, Identifiable, Hashable {
+    let id: String
+    let unit_id: String
+    let name: String
+    let description: String
+    let earned_at: String
+}
+
+struct UnitDetailResponse: Codable {
+    let unit: APIUnit
+    let honours: [APIHonour]
+    let scars: [APIScar]
+    let honour_available: Int?
+}
+
+struct RequisitionLogItem: Codable, Identifiable, Hashable {
+    let id: String
+    let force_id: String
+    let requisition_name: String
+    let cost_paid: Int
+    let target_unit_id: String?
+    let notes: String
+    let used_at: String
+}
+
+struct RequisitionResult: Codable {
+    let force: APIForce
+}
+
+struct RequisitionLogResponse: Codable { let log: [RequisitionLogItem] }
 
 struct APIInvite: Codable, Identifiable, Hashable {
     let id: String

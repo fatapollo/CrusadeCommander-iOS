@@ -30,6 +30,7 @@
 		F50F2DB7F81D46CEBBAB47CF /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FEE88AC96A4D488658420B /* EventsView.swift */; };
 		2D64A926BBB040EA9F8ED21E /* GenerateBattleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728C78FBE14477B9BC3D320 /* GenerateBattleMapView.swift */; };
 		2B3C4D5E6F708192A3B4C5D6 /* RequisitionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70819A0B1C2D /* RequisitionsView.swift */; };
+		4D5E6F708192A3B4C5D6E7F8 /* UnitDossierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D5E6F708192A3B4C5D6E7 /* UnitDossierView.swift */; };
 		37EAEC01C3C046D39D9B83FA /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD00745865C48BD9D3A832F /* SetupWizardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		FF102512F4B74828AF22E819 /* PlayerReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerReward.swift; sourceTree = "<group>"; };
 		F728C78FBE14477B9BC3D320 /* GenerateBattleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateBattleMapView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F70819A0B1C2D /* RequisitionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequisitionsView.swift; sourceTree = "<group>"; };
+		3C4D5E6F708192A3B4C5D6E7 /* UnitDossierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitDossierView.swift; sourceTree = "<group>"; };
 		0FD00745865C48BD9D3A832F /* SetupWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWizardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				E9E33210FD764E6BB8BB1D55 /* ConfigView.swift */,
 							F728C78FBE14477B9BC3D320 /* GenerateBattleMapView.swift */,
 							1A2B3C4D5E6F70819A0B1C2D /* RequisitionsView.swift */,
+							3C4D5E6F708192A3B4C5D6E7 /* UnitDossierView.swift */,
 				0FD00745865C48BD9D3A832F /* SetupWizardView.swift */,
 );
 			path = Views;
@@ -226,6 +229,7 @@
 				A825C3FCDF1F41B5B225DDFA /* ConfigView.swift in Sources */,
 							2D64A926BBB040EA9F8ED21E /* GenerateBattleMapView.swift in Sources */,
 							2B3C4D5E6F708192A3B4C5D6 /* RequisitionsView.swift in Sources */,
+							4D5E6F708192A3B4C5D6E7F8 /* UnitDossierView.swift in Sources */,
 				37EAEC01C3C046D39D9B83FA /* SetupWizardView.swift in Sources */,
 );
 			runOnlyForDeploymentPostprocessing = 0;

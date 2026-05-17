@@ -50,7 +50,12 @@ struct ForceDetailView: View {
                     if units.isEmpty {
                         EmptyStateView(icon: "◐", title: "No units yet", subtitle: "Add units to build the Order of Battle.")
                     } else {
-                        ForEach(units) { u in unitRow(u) }
+                        ForEach(units) { u in
+                            NavigationLink {
+                                UnitDossierView(campaignId: campaignId, forceId: forceId, unitId: u.id)
+                            } label: { unitRow(u) }
+                            .buttonStyle(.plain)
+                        }
                     }
                 } else if let error {
                     ErrorBanner(message: error)

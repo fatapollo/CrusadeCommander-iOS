@@ -228,6 +228,35 @@ extension APIClient {
     func getUnitDetail(_ campaignId: String, unitId: String) async throws -> UnitDetailResponse {
         try await get("/api/campaigns/\(campaignId)/units/\(unitId)")
     }
+    struct UpdateUnitBody: Encodable { let unit_type: String?; let status: String? }
+    func updateUnit(_ campaignId: String, unitId: String, unitType: String?, status: String?) async throws -> APIUnit {
+        let r: UnitResponse = try await patch("/api/campaigns/\(campaignId)/units/\(unitId)",
+            body: UpdateUnitBody(unit_type: unitType, status: status))
+        return r.unit
+    }
+    struct AddHonourBody: Encodable {
+        let category: String; let name: String; let description: String
+        let weapon_name: String; let relic_category: String?
+    }
+    struct HonourResponse: Decodable { let honour: APIHonour }
+    func addHonour(_ campaignId: String, unitId: String, category: String, name: String,
+                   description: String, weaponName: String, relicCategory: String?) async throws {
+        let _: HonourResponse = try await post("/api/campaigns/\(campaignId)/units/\(unitId)/honours",
+            body: AddHonourBody(category: category, name: name, description: description,
+                                weapon_name: weaponName, relic_category: relicCategory))
+    }
+    func removeHonour(_ campaignId: String, unitId: String, honourId: String) async throws {
+        let _: EmptyResponse = try await delete("/api/campaigns/\(campaignId)/units/\(unitId)/honours/\(honourId)")
+    }
+    struct AddScarBody: Encodable { let name: String; let description: String }
+    struct ScarResponse: Decodable { let scar: APIScar }
+    func addScar(_ campaignId: String, unitId: String, name: String) async throws {
+        let _: ScarResponse = try await post("/api/campaigns/\(campaignId)/units/\(unitId)/scars",
+            body: AddScarBody(name: name, description: ""))
+    }
+    func removeScar(_ campaignId: String, unitId: String, scarId: String) async throws {
+        let _: EmptyResponse = try await delete("/api/campaigns/\(campaignId)/units/\(unitId)/scars/\(scarId)")
+    }
 
     // Requisitions
     func requisitionLog(_ campaignId: String, forceId: String) async throws -> [RequisitionLogItem] {

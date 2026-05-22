@@ -32,6 +32,7 @@
 		2B3C4D5E6F708192A3B4C5D6 /* RequisitionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F70819A0B1C2D /* RequisitionsView.swift */; };
 		4D5E6F708192A3B4C5D6E7F8 /* UnitDossierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D5E6F708192A3B4C5D6E7 /* UnitDossierView.swift */; };
 		37EAEC01C3C046D39D9B83FA /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD00745865C48BD9D3A832F /* SetupWizardView.swift */; };
+		5E6F708192A3B4C5D6E7F8A9 /* SectorMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B7C6D5E4F3A2B1C0D9E8F /* SectorMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		1A2B3C4D5E6F70819A0B1C2D /* RequisitionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequisitionsView.swift; sourceTree = "<group>"; };
 		3C4D5E6F708192A3B4C5D6E7 /* UnitDossierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitDossierView.swift; sourceTree = "<group>"; };
 		0FD00745865C48BD9D3A832F /* SetupWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWizardView.swift; sourceTree = "<group>"; };
+		9A8B7C6D5E4F3A2B1C0D9E8F /* SectorMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 							1A2B3C4D5E6F70819A0B1C2D /* RequisitionsView.swift */,
 							3C4D5E6F708192A3B4C5D6E7 /* UnitDossierView.swift */,
 				0FD00745865C48BD9D3A832F /* SetupWizardView.swift */,
+				9A8B7C6D5E4F3A2B1C0D9E8F /* SectorMapView.swift */,
 );
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 							2B3C4D5E6F708192A3B4C5D6 /* RequisitionsView.swift in Sources */,
 							4D5E6F708192A3B4C5D6E7F8 /* UnitDossierView.swift in Sources */,
 				37EAEC01C3C046D39D9B83FA /* SetupWizardView.swift in Sources */,
+				5E6F708192A3B4C5D6E7F8A9 /* SectorMapView.swift in Sources */,
 );
 			runOnlyForDeploymentPostprocessing = 0;
 		};

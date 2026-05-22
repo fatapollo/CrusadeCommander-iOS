@@ -303,12 +303,34 @@ extension APIClient {
         let r: BattlesListResponse = try await get("/api/campaigns/\(campaignId)/battles")
         return r.battles
     }
+    struct UnitBattleInputBody: Encodable {
+        let unit_id: String
+        let was_warlord: Bool
+        let enemies_destroyed: Int
+        let was_destroyed: Bool
+        let marked_for_greatness: Bool
+        let ooa_result: String?
+        let grant_scar: String?
+        let grant_honour: GrantHonourBody?
+
+        struct GrantHonourBody: Encodable {
+            let category: String
+            let name: String
+            let description: String?
+            let weapon_name: String?
+            let relic_category: String?
+        }
+    }
     struct CreateBattleBody: Encodable {
         let battle_size: String; let mission_name: String
         let deployment: String; let duration_turns: Int; let opposing_commander: String
         let attacker_force_id: String; let defender_force_id: String
         let outcome: String; let attacker_score: Int; let defender_score: Int
         let notes: String
+        let attacker_units: [UnitBattleInputBody]?
+        let defender_units: [UnitBattleInputBody]?
+        let contesting_node_id: String?
+        let claim_node_on_win: Bool?
     }
     struct BattleCreatedResponse: Decodable {
         let battle: APIBattle
@@ -317,13 +339,21 @@ extension APIClient {
     func createBattle(_ campaignId: String, battleSize: BattleSize, mission: String,
                       deployment: String, durationTurns: Int, opposingCommander: String,
                       attackerId: String, defenderId: String, outcome: BattleOutcome,
-                      attackerScore: Int, defenderScore: Int, notes: String) async throws -> BattleCreatedResponse {
+                      attackerScore: Int, defenderScore: Int, notes: String,
+                      attackerUnits: [UnitBattleInputBody] = [],
+                      defenderUnits: [UnitBattleInputBody] = [],
+                      contestingNodeId: String? = nil,
+                      claimNodeOnWin: Bool = false) async throws -> BattleCreatedResponse {
         try await post("/api/campaigns/\(campaignId)/battles", body: CreateBattleBody(
             battle_size: battleSize.rawValue, mission_name: mission,
             deployment: deployment, duration_turns: durationTurns, opposing_commander: opposingCommander,
             attacker_force_id: attackerId, defender_force_id: defenderId,
             outcome: outcome.rawValue, attacker_score: attackerScore, defender_score: defenderScore,
-            notes: notes))
+            notes: notes,
+            attacker_units: attackerUnits.isEmpty ? nil : attackerUnits,
+            defender_units: defenderUnits.isEmpty ? nil : defenderUnits,
+            contesting_node_id: contestingNodeId,
+            claim_node_on_win: contestingNodeId != nil ? claimNodeOnWin : nil))
     }
     func confirmBattle(_ campaignId: String, _ battleId: String) async throws {
         let _: BattleCreatedResponse = try await post("/api/campaigns/\(campaignId)/battles/\(battleId)/confirm")

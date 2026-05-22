@@ -13,7 +13,7 @@ struct CampaignDashboardView: View {
     @State private var loading = true
     @State private var tab: Tab = .overview
 
-    enum Tab: String, CaseIterable { case overview = "Overview", forces = "Forces", battles = "Battles", members = "Members" }
+    enum Tab: String, CaseIterable { case overview = "Overview", forces = "Forces", battles = "Battles", members = "Members", map = "Map" }
 
     var body: some View {
         ScrollView {
@@ -51,6 +51,8 @@ struct CampaignDashboardView: View {
                             currentUserId: auth.user?.id ?? "",
                             isAdmin: role == .owner || role == .admin
                         )
+                    case .map:
+                        SectorMapPanel(campaign: c, forces: forces)
                     }
                 } else if let error {
                     ErrorBanner(message: error)

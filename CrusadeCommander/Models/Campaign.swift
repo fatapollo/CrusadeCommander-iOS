@@ -59,6 +59,70 @@ struct APICampaign: Codable, Identifiable, Hashable {
     let unit_count: Int?
     let battle_count: Int?
     let power_rating: Int?
+    // Sector map + phases (added in the desktop sector-map slice; iOS reads
+    // them read-only).
+    let phases: [APICampaignPhase]?
+    let sector_map: APISectorMap?
+}
+
+struct APICampaignPhase: Codable, Hashable {
+    let idx: Int
+    let label: String
+    let date: String?
+    let pending: Bool?
+}
+
+enum APINodeType: String, Codable {
+    case hive = "HIVE", forge = "FORGE", port = "PORT", relic = "RELIC"
+    case strong = "STRONG", wild = "WILD", obj = "OBJ"
+
+    var label: String {
+        switch self {
+        case .hive: return "Hive World"
+        case .forge: return "Forge World"
+        case .port: return "Spaceport"
+        case .relic: return "Relic Site"
+        case .strong: return "Stronghold"
+        case .wild: return "Wilderness"
+        case .obj: return "Objective"
+        }
+    }
+    var glyph: String {
+        switch self {
+        case .hive: return "H"; case .forge: return "F"; case .port: return "P"
+        case .relic: return "R"; case .strong: return "S"; case .wild: return "W"
+        case .obj: return "Ω"
+        }
+    }
+}
+
+struct APISectorPos: Codable, Hashable { let x: Double; let y: Double }
+
+struct APISectorHistory: Codable, Hashable { let phase: Int; let event: String }
+
+struct APISectorNode: Codable, Identifiable, Hashable {
+    let id: String
+    let name: String
+    let type: APINodeType
+    let pos: APISectorPos
+    let value: Int
+    let traits: [String]
+    let owners: [String]       // each entry is a force id, "NEUTRAL", or "CONTESTED"
+    let isObjective: Bool
+    let history: [APISectorHistory]?
+    let battles: [String]?
+
+    /// Carry-forward ownership lookup matching backend semantics.
+    func owner(atPhase phase: Int) -> String {
+        guard !owners.isEmpty else { return "NEUTRAL" }
+        let idx = max(0, min(owners.count - 1, phase - 1))
+        return owners[idx]
+    }
+}
+
+struct APISectorMap: Codable, Hashable {
+    let nodes: [APISectorNode]
+    let edges: [[String]]      // each inner array is [aId, bId]
 }
 
 struct APIForce: Codable, Identifiable, Hashable {
@@ -163,6 +227,9 @@ struct APIBattle: Codable, Identifiable, Hashable {
     let deployment: String?
     let duration_turns: Int?
     let opposing_commander: String?
+    // Sector-map linkage (optional; older backends omit these).
+    let contesting_node_id: String?
+    let claim_node_on_win: Bool?
 }
 
 struct APIHonour: Codable, Identifiable, Hashable {

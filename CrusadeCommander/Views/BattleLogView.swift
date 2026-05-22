@@ -125,6 +125,20 @@ struct BattlesPanel: View {
     }
 }
 
+private struct UnitParticipation: Equatable {
+    var selected: Bool = false
+    var wasWarlord: Bool = false
+    var enemiesDestroyed: Int = 0
+    var wasDestroyed: Bool = false
+    var markedForGreatness: Bool = false
+    var ooaResult: String = ""       // "", "passed", "battle_scar", "devastating_blow"
+    var grantScar: String = ""       // BattleScar name when ooa == battle_scar
+    var grantHonourName: String = "" // applied only if a rank-up occurred server-side
+}
+
+private let SCARS = ["Crippling Damage", "Battle-weary", "Fatigued",
+                     "Disgraced", "Mark of Shame", "Deep Scars"]
+
 struct RecordBattleSheet: View {
     @Environment(\.dismiss) private var dismiss
     let campaignId: String
@@ -146,6 +160,12 @@ struct RecordBattleSheet: View {
     @State private var busy = false
     @State private var error: String?
     @State private var feedback: String?
+
+    // Per-force unit listings + participation rows, keyed by unit id.
+    @State private var attackerUnits: [APIUnit] = []
+    @State private var defenderUnits: [APIUnit] = []
+    @State private var participation: [String: UnitParticipation] = [:]
+    @State private var loadingUnits = false
 
     init(campaignId: String, forces: [APIForce], defaultBattleSize: BattleSize, onDone: @escaping () -> Void) {
         self.campaignId = campaignId
@@ -218,6 +238,8 @@ struct RecordBattleSheet: View {
                     }
                 }
 
+                unitsCard
+
                 if let feedback {
                     CardBox {
                         VStack(alignment: .leading, spacing: 4) {
@@ -246,6 +268,175 @@ struct RecordBattleSheet: View {
         .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
         .onChange(of: attackerScore) { syncOutcome() }
         .onChange(of: defenderScore) { syncOutcome() }
+        .onChange(of: attackerId) { Task { await loadUnits(force: .attacker) } }
+        .onChange(of: defenderId) { Task { await loadUnits(force: .defender) } }
+    }
+
+    // MARK: - Units deployed
+
+    private enum Side { case attacker, defender }
+
+    @ViewBuilder
+    private var unitsCard: some View {
+        CardBox {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Text("UNITS DEPLOYED")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color.inkFade)
+                    Spacer()
+                    Text("\(selectedCount) selected")
+                        .font(.caption2)
+                        .foregroundStyle(Color.inkFade)
+                }
+                if attackerId.isEmpty || defenderId.isEmpty {
+                    Text("Pick both forces to choose units.")
+                        .font(.caption)
+                        .foregroundStyle(Color.inkFade)
+                } else if loadingUnits {
+                    ProgressView().tint(.accent)
+                } else {
+                    unitsForce(label: forceName(attackerId) + " (ATTACKER)", units: attackerUnits)
+                    unitsForce(label: forceName(defenderId) + " (DEFENDER)", units: defenderUnits)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func unitsForce(label: String, units: [APIUnit]) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("// \(label)")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(Color.accent)
+            if units.isEmpty {
+                Text("No units.").font(.caption2).foregroundStyle(Color.inkFade)
+            } else {
+                ForEach(units) { u in unitRow(u) }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func unitRow(_ u: APIUnit) -> some View {
+        let p = participation[u.id] ?? UnitParticipation()
+        VStack(alignment: .leading, spacing: 8) {
+            Toggle(isOn: toggleBinding(u.id, \.selected)) {
+                HStack(spacing: 6) {
+                    Text(u.name).font(.subheadline.weight(.semibold))
+                    Text("· \(u.unit_type ?? u.datasheet) · \(u.xp) XP")
+                        .font(.caption2)
+                        .foregroundStyle(Color.inkFade)
+                }
+            }
+            .toggleStyle(.switch)
+            .tint(.accent)
+
+            if p.selected {
+                HStack(spacing: 12) {
+                    labeled("Enemies Destroyed") {
+                        Stepper("\(p.enemiesDestroyed)", value: stepperBinding(u.id, \.enemiesDestroyed), in: 0...99)
+                            .padding(6).background(Color.bg).clipShape(RoundedRectangle(cornerRadius: 6))
+                    }
+                    VStack(alignment: .leading, spacing: 6) {
+                        Toggle("Warlord", isOn: toggleBinding(u.id, \.wasWarlord)).font(.caption)
+                        Toggle("Marked for Greatness", isOn: toggleBinding(u.id, \.markedForGreatness)).font(.caption)
+                        Toggle("Destroyed", isOn: toggleBinding(u.id, \.wasDestroyed)).font(.caption)
+                    }
+                }
+                if p.wasDestroyed {
+                    labeled("Out of Action") {
+                        Picker("", selection: stringBinding(u.id, \.ooaResult)) {
+                            Text("— not tested —").tag("")
+                            Text("Passed").tag("passed")
+                            Text("Battle Scar").tag("battle_scar")
+                            Text("Devastating Blow").tag("devastating_blow")
+                        }
+                        .pickerStyle(.menu)
+                        .padding(6).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 6))
+                    }
+                    if p.ooaResult == "battle_scar" {
+                        labeled("Scar to apply") {
+                            Picker("", selection: stringBinding(u.id, \.grantScar)) {
+                                Text("— none —").tag("")
+                                ForEach(SCARS, id: \.self) { Text($0).tag($0) }
+                            }
+                            .pickerStyle(.menu)
+                            .padding(6).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 6))
+                        }
+                    }
+                }
+                labeled("Grant Battle Honour (only if a rank was gained)") {
+                    TextField("e.g. Duellist", text: stringBinding(u.id, \.grantHonourName))
+                        .padding(8).background(Color.bgElevated).clipShape(RoundedRectangle(cornerRadius: 6))
+                }
+            }
+        }
+        .padding(10)
+        .background(Color.bg)
+        .overlay(Rectangle().stroke(Color.white.opacity(0.06)))
+    }
+
+    // MARK: - Bindings into the participation map
+
+    private func mutate(_ unitId: String, _ block: (inout UnitParticipation) -> Void) {
+        var row = participation[unitId] ?? UnitParticipation()
+        block(&row)
+        participation[unitId] = row
+    }
+    private func toggleBinding(_ unitId: String, _ kp: WritableKeyPath<UnitParticipation, Bool>) -> Binding<Bool> {
+        Binding(get: { (participation[unitId] ?? UnitParticipation())[keyPath: kp] },
+                set: { v in mutate(unitId) { $0[keyPath: kp] = v } })
+    }
+    private func stepperBinding(_ unitId: String, _ kp: WritableKeyPath<UnitParticipation, Int>) -> Binding<Int> {
+        Binding(get: { (participation[unitId] ?? UnitParticipation())[keyPath: kp] },
+                set: { v in mutate(unitId) { $0[keyPath: kp] = v } })
+    }
+    private func stringBinding(_ unitId: String, _ kp: WritableKeyPath<UnitParticipation, String>) -> Binding<String> {
+        Binding(get: { (participation[unitId] ?? UnitParticipation())[keyPath: kp] },
+                set: { v in mutate(unitId) { $0[keyPath: kp] = v } })
+    }
+
+    private var selectedCount: Int {
+        participation.values.filter { $0.selected }.count
+    }
+
+    private func forceName(_ id: String) -> String {
+        forces.first(where: { $0.id == id })?.name ?? "—"
+    }
+
+    private func loadUnits(force side: Side) async {
+        let id = side == .attacker ? attackerId : defenderId
+        guard !id.isEmpty else {
+            if side == .attacker { attackerUnits = [] } else { defenderUnits = [] }
+            return
+        }
+        loadingUnits = true
+        defer { loadingUnits = false }
+        do {
+            let units = try await APIClient.shared.listUnits(campaignId, forceId: id)
+            if side == .attacker { attackerUnits = units } else { defenderUnits = units }
+        } catch { /* surface silently — Inscribe Battle still works without per-unit rows */ }
+    }
+
+    private func collectUnitInputs(units: [APIUnit]) -> [APIClient.UnitBattleInputBody] {
+        units.compactMap { u in
+            let p = participation[u.id] ?? UnitParticipation()
+            guard p.selected else { return nil }
+            let honourName = p.grantHonourName.trimmingCharacters(in: .whitespacesAndNewlines)
+            return APIClient.UnitBattleInputBody(
+                unit_id: u.id,
+                was_warlord: p.wasWarlord,
+                enemies_destroyed: p.enemiesDestroyed,
+                was_destroyed: p.wasDestroyed,
+                marked_for_greatness: p.markedForGreatness,
+                ooa_result: p.ooaResult.isEmpty ? nil : p.ooaResult,
+                grant_scar: p.grantScar.isEmpty ? nil : p.grantScar,
+                grant_honour: honourName.isEmpty ? nil
+                    : .init(category: "Battle Trait", name: honourName,
+                            description: nil, weapon_name: nil, relic_category: nil)
+            )
+        }
     }
 
     private func syncOutcome() {
@@ -270,7 +461,9 @@ struct RecordBattleSheet: View {
                 deployment: deployment, durationTurns: durationTurns, opposingCommander: opposingCommander,
                 attackerId: attackerId, defenderId: defenderId,
                 outcome: outcome, attackerScore: attackerScore, defenderScore: defenderScore,
-                notes: notes
+                notes: notes,
+                attackerUnits: collectUnitInputs(units: attackerUnits),
+                defenderUnits: collectUnitInputs(units: defenderUnits)
             )
             if r.needs_confirmation == true {
                 feedback = "Waiting for the opposing player to confirm. XP and RP apply on confirmation."
